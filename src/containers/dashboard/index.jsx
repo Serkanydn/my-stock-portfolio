@@ -38,27 +38,23 @@ function Dashboard() {
 
   return (
     <div className="grid grid-cols-2 gap-4 ">
-      <div className=" p-5 border rounded-md shadow">
+      <div className="p-5 border rounded-md shadow ">
         <div class="flex items-center justify-between mb-5">
           <h4 className="text-xl font-semibold">{`Portfolyoların Toplam Maliyeti 
- : ${portfolios.reduce((acc, portfolio) => acc + portfolio.totalCost, 0)}`}</h4>
-          <button class="button bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 active:bg-gray-100 dark:active:bg-gray-500 dark:active:border-gray-500 text-gray-600 dark:text-gray-100 radius-round h-9 px-3 py-2 text-sm">
-            Export Report
-          </button>
+ : ${portfolios.reduce((acc, portfolio) => acc + portfolio.totalCost, 0).toFixed(2)}`}</h4>
+
         </div>
-        <div className="inline-flex w-full flex-col items-center justify-center">
+        <div className="inline-flex flex-col items-center justify-center w-full">
           <DoughnutChart labels={labels} datasets={costDatasets} />
         </div>
       </div>
-      <div className=" p-5 border rounded-md shadow">
+      <div className="p-5 border rounded-md shadow ">
         <div class="flex items-center justify-between mb-5">
           <h4 className="text-xl font-semibold">{`Portfolyoların Toplam Kar / Zararı
           : ${portfolios.reduce((acc, portfolio) => acc + portfolio.profitAndLoss, 0).toFixed(2)}`}</h4>
-          <button class="button bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 active:bg-gray-100 dark:active:bg-gray-500 dark:active:border-gray-500 text-gray-600 dark:text-gray-100 radius-round h-9 px-3 py-2 text-sm">
-            Export Report
-          </button>
+
         </div>
-        <div className="inline-flex w-full items-center justify-center">
+        <div className="inline-flex items-center justify-center w-full">
           <DoughnutChart labels={labels} datasets={profitDatasets} />
         </div>
       </div>
@@ -93,7 +89,7 @@ function Dashboard() {
   console.log("datasets", datasets);
 
   return (
-    <div className=" bg-red-100">
+    <div className="bg-red-100 ">
       <Chart type="pie" labels={labels} datasets={datasets} />
     </div>
   );

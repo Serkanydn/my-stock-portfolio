@@ -46,8 +46,8 @@ function AddPortfolio({ data, close }) {
         {({ values, handleSubmit, handleChange }) => (
           <>
             <Header title="Add Portfolio" />
-            <div className="w-full px-3 py-5 ">
-              <div className="grid mb-6 -mx-3 grid-col-2">
+            <div className="w-[600px] px-3 py-5 ">
+              <div className="grid grid-col-2">
                 <Input
                   name="name"
                   value={values.name}

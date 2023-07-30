@@ -17,8 +17,8 @@ const Sidebar = () => {
 
   const items = [
     { icon: <RiDashboardLine />, name: "Dashboard", link: "/" },
-    { icon: <RxDashboard />, name: "Portfolio", link: "/portfolios" },
-    { icon: <RxArchive />, name: "Archive", link: "/archive" },
+    { icon: <RxDashboard />, name: "Portfolios", link: "/portfolios" },
+    // { icon: <RxArchive />, name: "Archive", link: "/archive" },
     // BiArchiveIn
     // BiArchiveOut
   ];
@@ -42,9 +42,8 @@ const Sidebar = () => {
                 onClick={() => {
                   setSelectedItem(item.link);
                 }}
-                className={`flex w-full items-center h-[40px] rounded-md mb-2 px-3 hover:bg-[#DCDDE1] cursor-poiner ${
-                  selectedItem === item.link && "bg-[#DCDDE1]"
-                }`}
+                className={`flex w-full items-center h-[40px] rounded-md mb-2 px-3 hover:bg-[#DCDDE1] cursor-poiner ${selectedItem === item.link && "bg-[#DCDDE1]"
+                  }`}
               >
                 <span className={`${isShow && "mr-2"}  text-xl`}>
                   {item.icon}

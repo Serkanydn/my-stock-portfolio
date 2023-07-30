@@ -101,9 +101,6 @@ function StockCard({ data: stock }) {
     createModal("recordsTable", {
       head: [
         {
-          name: "Name",
-        },
-        {
           name: "Action",
           sortable: true,
         },
@@ -135,13 +132,14 @@ function StockCard({ data: stock }) {
           name: "Total Cost",
         },
         {
-          name: "Actions",
+          name: "",
           width: 100,
         },
       ],
       records: stock.records,
       stockId: stock.id,
       portfolioId: stock.portfolioId,
+      ignoredFields: ["Name"]
     });
   };
   return (

@@ -5,18 +5,21 @@ import Footer from "./components/footer";
 import Table from "@/components/table";
 import { createModal } from "@/utils/modal";
 import { useSelector, useDispatch } from "react-redux";
-import { refresh } from "@/store/portfolios"
+import { refresh } from "@/store/portfolios";
 import * as XLSX from "xlsx";
 
-function RecordsTable({ data: { head, records, stockId, portfolioId }, close }) {
+function RecordsTable({
+  data: { head, records, stockId, portfolioId, ignoredFields },
+  close,
+}) {
   const { data: portfolios } = useSelector((state) => state.portfolios);
 
-  const portfolio = portfolios.find((portfolio) => portfolio.id === portfolioId);
-  const stock = portfolio.stocks.find((stock) => stock.id === stockId)
+  const portfolio = portfolios.find(
+    (portfolio) => portfolio.id === portfolioId
+  );
+  const stock = portfolio.stocks.find((stock) => stock.id === stockId);
 
-  console.log('stock.records', stock.records)
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleDelete = (record) => {
     createModal("deleteStockRecord", record, true);
@@ -25,17 +28,16 @@ function RecordsTable({ data: { head, records, stockId, portfolioId }, close }) 
     createModal("updateStockRecord", record);
   };
 
-
-
   return (
     <div>
-      <Header title="Stock Summary" />
-      <div className="w-full px-3 py-5 ">
+      <Header title={`Stock Summary (${stock.name})`} />
+      <div className="w-[960px] px-3 py-5 ">
         <Table
+          ignoredFields={ignoredFields}
           searchable={true}
           head={head}
-          pagination={{ paginate: true, pageSize: 4 }}
-          bodyTrClassConditionIndex={6}
+          pagination={{ paginate: true, pageSize: 8 }}
+          bodyTrClassConditionIndex={5}
           bodyTrClassCondition={(prop) => {
             const value = prop?.key || prop;
             if (value > 0) {
@@ -56,7 +58,7 @@ function RecordsTable({ data: { head, records, stockId, portfolioId }, close }) 
                   onClick={() => {
                     handleUpdate(record);
                   }}
-                  className="flex items-center justify-center w-full h-8 px-4 text-white bg-blue-600 rounded"
+                  className="flex items-center justify-center w-full px-2 py-1 text-white bg-blue-600 rounded"
                 >
                   Düzenle
                 </button>,
@@ -68,7 +70,7 @@ function RecordsTable({ data: { head, records, stockId, portfolioId }, close }) 
                     onClick={() => {
                       handleDelete(record);
                     }}
-                    className="flex items-center h-8 px-4 text-white bg-red-600 rounded"
+                    className="flex items-center px-2 py-1 text-white bg-red-600 rounded"
                   >
                     Sil
                   </button>
@@ -76,7 +78,6 @@ function RecordsTable({ data: { head, records, stockId, portfolioId }, close }) 
               }
 
               return [
-                record.name,
                 record.action,
                 new Date(record.date).toLocaleDateString("tr-TR", {
                   year: "numeric",
@@ -88,18 +89,46 @@ function RecordsTable({ data: { head, records, stockId, portfolioId }, close }) 
                 record.commission,
                 <div
                   key={record.profitAndLossPercent}
-                  className={record.profitAndLossPercent > 0 ? "text-green-600" : record.profitAndLossPercent !== "-" ? "text-red-600" : ""}
-                  title={record.action === "Sell" ? "Percentage increase / decrease compared to average purchases " : ""}
+                  className={
+                    record.profitAndLossPercent > 0
+                      ? "text-green-600"
+                      : record.profitAndLossPercent !== "-"
+                      ? "text-red-600"
+                      : ""
+                  }
+                  title={
+                    record.action === "Sell"
+                      ? "Percentage increase / decrease compared to average purchases "
+                      : ""
+                  }
                 >
-                  {record.action === "Sell" ? "%" + record.profitAndLossPercent : record.profitAndLossPercent}
+                  {record.action === "Sell"
+                    ? "%" + record.profitAndLossPercent
+                    : record.profitAndLossPercent}
                 </div>,
                 <div
-                  className={record.profitAndLoss > 0 ? "text-green-600" : record.profitAndLoss !== "-" ? "text-red-600" : ""}
-                  title={record.action === "Sell" ? "Increase / decrease compared to average purchases" : ""}
+                  className={
+                    record.profitAndLoss > 0
+                      ? "text-green-600"
+                      : record.profitAndLoss !== "-"
+                      ? "text-red-600"
+                      : ""
+                  }
+                  title={
+                    record.action === "Sell"
+                      ? "Increase / decrease compared to average purchases"
+                      : ""
+                  }
                 >
                   {record.profitAndLoss}
                 </div>,
-                <span title={record.action === "Buy" ? "Total cost after adding commission" : "Total earnings after deducting commission"}>
+                <span
+                  title={
+                    record.action === "Buy"
+                      ? "Total cost after adding commission"
+                      : "Total earnings after deducting commission"
+                  }
+                >
                   {record.totalCost}
                 </span>,
                 ,

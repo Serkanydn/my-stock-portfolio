@@ -48,28 +48,34 @@ function UpdateStock({ data: record, close }) {
         {({ values, handleSubmit, handleChange }) => (
           <>
             <Header title="Update Record" />
-            <div className="p-3 flex flex-wrap -mx-3  ">
+            <div className="p-3 grid grid-cols-2 w-[600px]  ">
               <Input
+                containerClass="col-span-2"
                 disabled
                 title="Hisse Adı"
                 name="name"
-                position="2"
                 value={values.name}
                 onChange={handleChange("name")}
               />
               <SelectBox
                 data={selectBoxData}
                 title="İşlem"
-                position="2"
                 name="action"
                 value={values.action}
                 onChange={handleChange("action")}
               />
 
               <Input
+                title="Adet"
+                type="number"
+                name="piece"
+                value={values.piece}
+                onChange={handleChange("piece")}
+              />
+
+              <Input
                 title="Fiyat"
                 type="number"
-                position="2"
                 name="cost"
                 value={values.cost}
                 onChange={handleChange("cost")}
@@ -78,24 +84,15 @@ function UpdateStock({ data: record, close }) {
               <Input
                 title="Komisyon"
                 type="number"
-                position="2"
                 name="commission"
                 value={values.commission}
                 onChange={handleChange("commission")}
               />
-              <Input
-                title="Adet"
-                type="number"
-                position="2"
-                name="piece"
-                value={values.piece}
-                onChange={handleChange("piece")}
-              />
+
 
               <Input
                 title="Tarih"
                 type="date"
-                position="3"
                 name="date"
                 value={values.date}
                 onChange={handleChange("date")}
@@ -104,7 +101,6 @@ function UpdateStock({ data: record, close }) {
               <Input
                 title="Saat"
                 type="time"
-                position="3"
                 name="time"
                 value={values.time}
                 onChange={handleChange("time")}

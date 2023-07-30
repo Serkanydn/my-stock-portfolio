@@ -67,29 +67,36 @@ function AddRecord({ data: { portfolioId, stockId, name, action }, close }) {
         {({ values, handleSubmit, handleChange }) => (
           <>
             <Header title="Add Record" />
-            <div className="flex flex-wrap p-3 -mx-3 ">
+            <div className="grid grid-cols-2 p-3 w-[600px] ">
               <Input
+                containerClass="col-span-2 "
                 disabled
                 title="Hisse Adı"
                 name="name"
-                position="2"
                 value={values.name}
                 onChange={handleChange("name")}
               />
+
               <SelectBox
                 data={selectBoxData}
                 disabled
                 title="İşlem"
-                position="2"
                 name="action"
                 value={values.action}
                 onChange={handleChange("action")}
               />
 
               <Input
+                title="Adet"
+                type="number"
+                name="piece"
+                value={values.piece}
+                onChange={handleChange("piece")}
+              />
+
+              <Input
                 title="Fiyat"
                 type="number"
-                position="2"
                 name="cost"
                 value={values.cost}
                 onChange={handleChange("cost")}
@@ -98,19 +105,11 @@ function AddRecord({ data: { portfolioId, stockId, name, action }, close }) {
               <Input
                 title="Komisyon"
                 type="number"
-                position="2"
                 name="commission"
                 value={values.commission}
                 onChange={handleChange("commission")}
               />
-              <Input
-                title="Adet"
-                type="number"
-                position="2"
-                name="piece"
-                value={values.piece}
-                onChange={handleChange("piece")}
-              />
+
 
               <Input
                 title="Tarih"

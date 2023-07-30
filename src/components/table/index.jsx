@@ -13,6 +13,7 @@ function Table({
   pagination,
   bodyTrClassConditionIndex,
   bodyTrClassCondition,
+  ignoredFields
 }) {
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState(false);
@@ -82,8 +83,8 @@ function Table({
         </div>
       )}
 
-      <div className="w-full border rounded ">
-        <table className="w-full">
+      <div className="w-full h-full border rounded">
+        <table className="w-full h-full ">
           <thead>
             <tr>
               {head.map((h, index) => (
@@ -125,20 +126,18 @@ function Table({
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
             {filteredData &&
               filteredData.map((items, index) => (
                 <tr
                   key={index * 999}
-                  className={`group ${bodyTrClassCondition &&
-                    bodyTrClassCondition &&
-                    bodyTrClassCondition(items[bodyTrClassConditionIndex])
+                  className={`group ${bodyTrClassCondition && bodyTrClassCondition(items[bodyTrClassConditionIndex])
                     } `}
                 >
                   {items.map((item, index) => (
                     <td
                       key={item.id}
-                      className="p-3 text-sm text-center group-hover:bg-gray-100"
+                      className="p-2 text-sm text-center group-hover:bg-gray-100"
                     >
                       {Array.isArray(item) ? (
                         <div className="flex gap-x-2.5 ">{item}</div>
@@ -152,7 +151,7 @@ function Table({
           </tbody>
         </table>
         {body.length > page.size && (
-          <div className="flex justify-between w-full px-5 border-t">
+          <div className="flex justify-between w-full px-5 border-t ">
             <div className="grid items-center">
               Page {page.currentPage} of {page.count} ({body.length} items)
             </div>

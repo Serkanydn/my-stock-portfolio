@@ -16,7 +16,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import toaserService from "@/services/toaster";
 
 import { MdMenu, MdMenuOpen } from "react-icons/md";
-
+import { createModal } from "@/utils/modal";
+import { getDate } from "@/utils/toolkit";
 
 function Header() {
   const fileInputRef = useRef(null);
@@ -27,7 +28,6 @@ function Header() {
   useEffect(() => {
     const portfolios = localStorageService.getPortfolios();
     if (portfolios?.length > 0) dispatch(setPortfolios(portfolios));
-
   }, []);
 
   const importExcel = async (event) => {
@@ -125,9 +125,73 @@ function Header() {
     fileInputRef.current.value = null;
   };
 
+  const handleEmptyExcell = () => {
+    const wb = XLSX.utils.book_new();
+
+    const excelFormat = [
+      [
+        "Name",
+        "Cost",
+        "Piece",
+        "Commission",
+        "Action",
+        "Profit And Loss (%)",
+        "Profit And Loss",
+        "Date",
+        "Total Cost",
+      ],
+      [
+        "Stock Name",
+        "100",
+        "1",
+        "5",
+        "Buy",
+        "-",
+        "-",
+        `${new Date(getDate().date).toLocaleDateString("Tr-tr")} ${
+          getDate().time
+        }`,
+        "100",
+      ],
+      [
+        "Stock Name",
+        "200",
+        "1",
+        "5",
+        "Sell",
+        "100%",
+        "100",
+        `${new Date(getDate().date).toLocaleDateString("Tr-tr")} ${
+          getDate().time
+        }`,
+        "205",
+      ],
+      ["", "", "", "", "", "", "", "", ""],
+      [
+        "",
+        `Total: 0`,
+        `Total Piece: 0 `,
+        "",
+        "",
+        "",
+        `Total Profit And Loss: 100`,
+        "",
+        "",
+      ],
+      ["", `Average: 0`, "", "", "", "", "", "", ""],
+    ];
+
+    const ws = XLSX.utils.aoa_to_sheet(excelFormat);
+    XLSX.utils.book_append_sheet(wb, ws, "Stock Name");
+
+    XLSX.writeFile(wb, `Portfolio Name.xlsx`);
+  };
+
   const toggle = () => {
     dispatch(toggleSidebar());
   };
+
+  const handleShowModal = () => createModal("addPortfolio");
 
   return (
     <>
@@ -141,22 +205,25 @@ function Header() {
         </div>
 
         <div className="flex items-center justify-end gap-2 me-3">
-          <label
-            // onClick={handleImportExcel}
-            className="inline-flex items-center justify-center px-3 py-1 text-gray-100 duration-200 ease-in-out bg-yellow-500 rounded-md cursor-pointer select-none hover:bg-yellow-600"
+          <button
+            onClick={handleEmptyExcell}
+            className="p-2 text-white duration-300 ease-linear bg-yellow-500 rounded-md cursor-pointer select-none hover:bg-yellow-600"
           >
+            Install Empty Excel
+          </button>
+          <label className="p-2 text-white duration-300 ease-linear bg-yellow-500 rounded-md cursor-pointer select-none hover:bg-yellow-600">
             <input
               type="file"
               ref={fileInputRef}
               multiple
               onChange={importExcel}
               accept=".xlsx"
-              className="hidden select-none"
+              className="hidden select-none "
             />
             İmport Portfolio From Excel
           </label>
 
-          <AddPortfolioButton />
+          <AddPortfolioButton onClick={handleShowModal} />
         </div>
       </div>
     </>

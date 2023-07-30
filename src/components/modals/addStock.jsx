@@ -63,11 +63,10 @@ function AddStock({ data: portfolioId, close }) {
         {({ values, handleSubmit, handleChange }) => (
           <>
             <Header title="Add Stock" />
-            <div className="flex flex-wrap p-3 -mx-3 ">
+            <div className="grid  p-3 w-[600px] ">
               <SelectBox
                 data={stockData}
                 title="İşlem"
-                position="full"
                 name="name"
                 value={values.name}
                 onChange={handleChange("name")}

@@ -61,14 +61,16 @@ export const portfolios = createSlice({
       );
       portfolio.stocks.splice(stockIndex, 1, stock);
 
-      portfolio.profitAndLoss = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.profitAndLoss,
-        0
+      portfolio.profitAndLoss = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.profitAndLoss, 0)
+          .toFixed(2)
       );
 
-      portfolio.totalCost = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.totalCost,
-        0
+      portfolio.totalCost = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.totalCost, 0)
+          .toFixed(2)
       );
 
       localStorageService.replacePortfolio(portfolio);
@@ -103,14 +105,16 @@ export const portfolios = createSlice({
       );
       portfolio.stocks.splice(stockIndex, 1, stock);
 
-      portfolio.totalCost = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.totalCost,
-        0
+      portfolio.profitAndLoss = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.profitAndLoss, 0)
+          .toFixed(2)
       );
 
-      portfolio.profitAndLoss = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.profitAndLoss,
-        0
+      portfolio.totalCost = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.totalCost, 0)
+          .toFixed(2)
       );
 
       localStorageService.replacePortfolio(portfolio);
@@ -126,14 +130,16 @@ export const portfolios = createSlice({
         (stock) => stock.id !== stockId
       );
 
-      portfolio.totalCost = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.totalCost,
-        0
+      portfolio.profitAndLoss = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.profitAndLoss, 0)
+          .toFixed(2)
       );
 
-      portfolio.profitAndLoss = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.profitAndLoss,
-        0
+      portfolio.totalCost = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.totalCost, 0)
+          .toFixed(2)
       );
 
       localStorageService.deleteStock(portfolioId, stockId);
@@ -160,14 +166,16 @@ export const portfolios = createSlice({
       stock.profitAndLoss = profitAndLoss || 0;
       stock.records = [...newRecords];
 
-      portfolio.totalCost = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.totalCost,
-        0
+      portfolio.profitAndLoss = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.profitAndLoss, 0)
+          .toFixed(2)
       );
 
-      portfolio.profitAndLoss = portfolio.stocks.reduce(
-        (acc, stock) => acc + stock.profitAndLoss,
-        0
+      portfolio.totalCost = parseFloat(
+        portfolio.stocks
+          .reduce((acc, stock) => acc + stock.totalCost, 0)
+          .toFixed(2)
       );
       localStorageService.replacePortfolio(portfolio);
     },

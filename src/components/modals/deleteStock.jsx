@@ -17,7 +17,7 @@ function DeleteStock({ data: { portfolioId, stockId }, close }) {
   return (
     <div>
       <Header title={"Delete Stock"} />
-      <div className="p-4">Would you like to delete the record?</div>
+      <div className="p-4">Would you like to delete the stock?</div>
       <Footer action={handleConfirm} actionButtonTitle="Confirm" />
     </div>
   );

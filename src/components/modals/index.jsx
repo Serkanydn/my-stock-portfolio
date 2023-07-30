@@ -28,7 +28,7 @@ function Modal() {
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 ">
         <div
           onClick={(event) => event.stopPropagation()}
-          className="w-full max-w-5xl bg-white border border-gray-400 rounded-md drop-shadow-xl animate-opacity"
+          className="bg-white border border-gray-400 rounded-md drop-shadow-xl animate-opacity"
         >
           <m.element data={lastModal.data} close={destroyModal} />
         </div>
@@ -47,7 +47,7 @@ function Modal() {
           <div
             key={index}
             onClick={(event) => event.stopPropagation()}
-            className="hidden w-full max-w-5xl bg-white border border-gray-400 rounded-md last:block drop-shadow-xl animate-opacity"
+            className="hidden bg-white border border-gray-400 rounded-md last:block drop-shadow-xl animate-opacity"
           >
             <m.element data={modal.data} close={destroyModal} />
           </div>

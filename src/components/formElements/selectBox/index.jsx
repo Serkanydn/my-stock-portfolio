@@ -12,6 +12,7 @@ function SelectBox({
   title,
   position,
   disabled,
+  containerClass,
   ...props
 }) {
   const [field, meta, helpers] = useField(props);
@@ -31,8 +32,7 @@ function SelectBox({
 
   return (
     <div
-      className={`  inline-block relative  px-3 w-${position !== "full" ? "1/" + position : "full"
-        } max-sm:w-full mb-6 `}
+      className={`inline-block relative  px-3 max-sm:w-full mb-6 ${containerClass} `}
     >
       <label className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase ">
         {title}

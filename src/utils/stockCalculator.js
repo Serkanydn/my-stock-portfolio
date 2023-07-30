@@ -16,6 +16,9 @@ export const calculatePurchaseAndPostSaleSummary = (records) => {
 
       transaction.totalCost =
         transaction.piece * transaction.cost + transaction.commission;
+
+      transaction.profitAndLoss = "-";
+      transaction.profitAndLossPercent = "-";
     }
 
     const remainingTotalPurchasedPiece =
